@@ -8,8 +8,8 @@
   "role": "",
   "type": "",
   "stats": {
-      "fight": 0,
-      "shoot": 0,
+      "Combat": 0,
+      "Tir": 0,
       "defence": 0,
       "mind": 0,
       "body": 0,
