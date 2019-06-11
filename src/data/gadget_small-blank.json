@@ -2,10 +2,10 @@
     "__version": "0.0.1",
     "__card": "gadget_small",
     "__custom":{},
-    "name": null,
-    "cost": 0,
+    "nom": null,
+    "coût": 0,
     "play": "",
-    "weapon":[],
+    "arme":[],
     "description": "",
     "profile":""
   }
