@@ -5,6 +5,8 @@ import cleanDeep from 'clean-deep';
 import { first, middle, last} from 'random-name'
 import {actionTypes} from 'redux-localstorage'
 import Ajv from 'ajv';
+import {locale} from "../index"
+
 const ajv = new Ajv();
       ajv.addMetaSchema(require('ajv/lib/refs/json-schema-draft-04.json'));
 
@@ -52,7 +54,8 @@ export const saveYamlFile=(docs,asSingleFile=false, options={skipInvalid:true})=
 
 const INITIALSTATE = {
     currentCharacter:null,
-    cast: []
+    cast: [],
+    locale: 'gb_EN'
 }
 
 const getTemplateCharacterNew=(payload, templatename='model')=>{
@@ -66,6 +69,7 @@ const reducer = (state = INITIALSTATE, action) => {
     const TEMPLATE_CHARACTER_NEW = getTemplateCharacterNew(action.payload)
     switch (action.type) {
         case actionTypes.INIT:
+            locale.set(state.locale);
             return validateState(state);
             break;
         case "CHARACTER_NEW":
@@ -104,6 +108,12 @@ const reducer = (state = INITIALSTATE, action) => {
         case "CAST_CLEAR":
             state.cast=[]
         break;
+
+        case "LOCALE_CHANGE":
+            state.locale = action.payload
+            locale.set(state.locale);
+        break;
+
         default:
             return state;
     }

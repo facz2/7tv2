@@ -14,6 +14,7 @@ import '../assets/fonts/din-cond/style.css';
 import { resolve } from 'path';
 import sortBy from 'sort-by'
 import { range } from 'rxjs';
+import { locale } from '../index';
 
 const PAGE_WIDTH=10.55;
 const PAGE_HEIGHT=7.55;
@@ -297,8 +298,12 @@ const downloadSnapshot=function(state)
 
 export class Rescue extends React.Component {
     render(){
+        
         return <div className="ui paper"> <DropdownButton bsStyle="primary" bsSize="xsmall" title="Debug"  id="new_model" dropup >
-            <MenuItem eventKey="1" onClick={e=>downloadSnapshot(this.props.state)}>Download data snapshot</MenuItem>
+            <MenuItem eventKey="0" onClick={e=>downloadSnapshot(this.props.state)}>Download data snapshot</MenuItem>
+            <hr/>
+            {Object.keys(locale.localeString).map((l,i)=>(<MenuItem key={i} eventKey={i} onClick={e=>this.props.dispatch({ type: 'LOCALE_CHANGE', payload: l }) }>{l}</MenuItem>))}
+            
        </DropdownButton></div>
     }
 }

@@ -27,7 +27,7 @@ const StatBlock = ({ stats, className="", zero='0', ...rest }) => {
     return <div className={"stats " + className}>
         {Object.entries(stats).map((entry, i) => {
             let [key, value] = entry;
-            return <div key={i} className={key}><div>{key}</div><div><var>{(value)?value:zero}</var></div></div>
+            return <div key={i} className={key}><div>{T(key)}</div><div><var>{(value)?value:zero}</var></div></div>
         })}
     </div>
 }
@@ -44,7 +44,7 @@ const Weapons = ({ items }) => {
     let colspan=items.length? Object.keys(items[0].effects).length : 1
 
     return <table className="weapons">
-        <thead><tr><td rowSpan="2" className="attack">Attack</td><td  className="range" rowSpan="2">Range</td><td rowSpan="2" className="strike">Strike</td><td className="effects" colSpan={colspan}>Effects</td></tr>
+        <thead><tr><td rowSpan="2" className="attack">{T('Attack')}</td><td  className="range" rowSpan="2">{T('Range')}</td><td rowSpan="2" className="strike">{T('Strike')}</td><td className="effects" colSpan={colspan}>{T('Effects')}</td></tr>
                 { (items.length && typeof items[0].effects =='object') ? (<tr>{ Object.keys(items[0].effects).map((key,i)=>{ return <td key={i} className={key}>{key}</td>})}</tr>) : undefined }
             </thead>
         <tbody>
@@ -109,7 +109,7 @@ class ModsTable extends React.Component {
 
 
 const Ratings = ({ value }) => {
-    return <div className="ratings"><strong><val>{value}</val> RATINGS</strong></div>
+    return <div className="ratings"><strong><val>{value}</val> {T('RATINGS')}}</strong></div>
 }
 
 
@@ -129,7 +129,7 @@ const Description = ({text}) =>{
 
 const Title = ({ name="", alignment="", type="" }) => {
     let _type = typeof type == 'object'? Object.keys(type)[0] : type;
-    return <div className="title"><strong>{name}</strong> <i className={_type.toLowerCase()} /> <span>{alignment} {_type}</span></div>
+    return <div className="title"><strong>{name}</strong> <i className={_type.toLowerCase()} /> <span className="role">{alignment} {_type}</span></div>
 }
 
 const Tags = ({ values, additional=[] }) => {
@@ -185,7 +185,7 @@ export class CardFront extends React.Component {
             <StatBlock stats={{ capacity, armour, defence }} />
             {weapons.length? <Weapons items={weapons} />:<Description text={description}/>}
             <div className="sfxribbon">
-                <dl><dt>Special effects</dt><dd>{sfx.map((s, i) => (<Trait key={i} object={s} />))}</dd></dl>
+                <dl><dt>{T('Special effects')}</dt><dd>{sfx.map((s, i) => (<Trait key={i} object={s} />))}</dd></dl>
             </div>
             <Ratings value={ratings} />
             <CheckRibbon stat={health} className="health" />
@@ -247,8 +247,8 @@ export class CardFront extends React.Component {
             <StatBlock className="left" stats={{ fight, shoot, defence }} />
             <StatBlock className="right" stats={{ mind, body, spirit }} />
             <div className="sfxribbon">
-                <dl><dt>Star quality</dt><dd>{qlty.map((s, i) => (<Trait key={i} object={s} />))}</dd></dl>
-                <dl><dt>Special effects</dt><dd>{sfx.map((s, i) => (<Trait key={i} object={s} />))}</dd></dl>
+                <dl><dt>{T('Star quality')}</dt><dd>{qlty.map((s, i) => (<Trait key={i} object={s} />))}</dd></dl>
+                <dl><dt>{T('Special effects')}</dt><dd>{sfx.map((s, i) => (<Trait key={i} object={s} />))}</dd></dl>
             </div>
             <Weapons items={weapons} />
             <Ratings value={ratings} />
@@ -303,9 +303,9 @@ export class CardBack extends React.Component {
         <div className="foreground">
             <Title name={name} type={type} />
             <section>
-                {weapons.length && description? (<heading>Description</heading>):undefined}
+                {weapons.length && description? (<heading>{T('Description')}</heading>):undefined}
                 {weapons.length && description? (<Description text={description}/>):undefined}
-                {sfx.length? (<heading>Special effects</heading>):undefined}
+                {sfx.length? (<heading>{T('Special effects')}</heading>):undefined}
                 {sfx.map((v, i) => (<Trait key={i} object={v} full />))}
                 {notes? (<heading>Notes</heading>):undefined}
                 <p>{notes}</p>
@@ -330,9 +330,9 @@ export class CardBack extends React.Component {
             <Title name={name}  />
             <Pic className={vehicle} photo={photo}/>
             <section>
-                {weapons.length && description? (<heading>Description</heading>):undefined}
+                {weapons.length && description? (<heading>{T('Description')}</heading>):undefined}
                 {weapons.length && description? (<Description text={description}/>):undefined}
-                {sfx.length? (<heading>Special effects</heading>):undefined}
+                {sfx.length? (<heading>{T('Special effects')}</heading>):undefined}
                 {sfx.map((v, i) => (<Trait key={i} object={v} full />))}
                 {notes? (<heading>Notes</heading>):undefined}
                 <p>{notes}</p>
@@ -378,7 +378,7 @@ export class CardBack extends React.Component {
             <section>
                 {qlty.length? <heading>Star quality</heading> :undefined} 
                 {qlty.map((v, i) => (<Trait key={i} object={v} full />))}
-                {sfx.length? <heading>Special effects</heading> : undefined}
+                {sfx.length? <heading>{T('Special effects')}</heading> : undefined}
                 {sfx.map((v, i) => (<Trait key={i} object={v} full />))}
                 {notes && (<heading>Notes</heading>)}
                 <p>{notes}</p>
@@ -433,10 +433,10 @@ export class Card extends React.Component {
             <div className="ui paper" style={{position:"absolute", right:0}}>
 
             <DropdownButton bsSize="xsmall" title="" bsStyle="warning" id={"ddb-"+id} >
-            <MenuItem eventKey="1" onClick={e => {this.props.dispatch({ type: 'CHARACTER_REMOVE', payload: { id } })}}>Remove</MenuItem>
-            <MenuItem eventKey="2" onClick={e => { downloadSingleCharacter(this.props.character)}}>Download</MenuItem>
-            <MenuItem eventKey="3" onClick={e => { sendAsImage(id, "7TV_cast-"+slug(this.props.character.name||this.props.character.id)+".png",{scale:2})}}>Download as Single Image</MenuItem>
-            <MenuItem eventKey="4" onClick={e => { sendAsImage(id, "7TV_cast-"+slug(this.props.character.name||this.props.character.id)+"_{n}.png",{scale:2, selector:'.cellophan'})}}>Download as Separate Images</MenuItem>
+            <MenuItem eventKey="1" onClick={e => {this.props.dispatch({ type: 'CHARACTER_REMOVE', payload: { id } })}}>{T('Remove')}</MenuItem>
+            <MenuItem eventKey="2" onClick={e => { downloadSingleCharacter(this.props.character)}}>{T('Download')}</MenuItem>
+            <MenuItem eventKey="3" onClick={e => { sendAsImage(id, "7TV_cast-"+slug(this.props.character.name||this.props.character.id)+".png",{scale:2})}}>{T('Download as Single Image')}</MenuItem>
+            <MenuItem eventKey="4" onClick={e => { sendAsImage(id, "7TV_cast-"+slug(this.props.character.name||this.props.character.id)+"_{n}.png",{scale:2, selector:'.cellophan'})}}>{T('Download as Separate Images')}</MenuItem>
             </DropdownButton></div></div>)
     }
 }

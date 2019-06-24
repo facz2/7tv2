@@ -42,6 +42,7 @@ simpleLocale.prototype.get = function(key, bindStr) {
 
 		// if no string found, just returns key
 		if(!pos) {
+			console.warn(`Translate not found: ${this.currentLocale} '${key}'`)
 			return key;
 		}
 	}

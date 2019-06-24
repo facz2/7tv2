@@ -6,9 +6,10 @@ import { Toolbar, Help, Rescue } from './Ui'
 import { CharacterEditor } from './CharacterEditor'
 import SplitPane from 'react-split-pane'
 import '../assets/resizer.css'
-
+import {locale} from '../index'
 
 class App extends Component {
+
   render() {
     return (
       <div className="App">
