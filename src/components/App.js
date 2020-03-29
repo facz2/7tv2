@@ -7,6 +7,7 @@ import { CharacterEditor } from './CharacterEditor'
 import SplitPane from 'react-split-pane'
 import '../assets/resizer.css'
 import {locale} from '../index'
+import {T,zip} from '../index'
 
 class App extends Component {
 

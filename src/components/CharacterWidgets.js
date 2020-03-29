@@ -10,6 +10,8 @@ import UnsupportedField from '../../node_modules/react-jsonschema-form/lib/compo
 import uuid from 'uuid';
 import dotProp from 'dot-prop';
 
+import {T,zip} from '../index'
+
 const parseTrait=(label,text)=>{
     let trait={}
     if (typeof text === 'string') {
@@ -189,7 +191,7 @@ export class ProfileSelector extends React.Component {
         }
 
         return <div className="profileSelector">
-            <h4>Select a character or Create new</h4>
+            <h4>{T('Select a character or Create new')}</h4>
             {cast}
             <Button onClick={e=>fromTemplate()} bsStyle="primary" block disabled={!this.state.selected}>New from template</Button>
         </div>

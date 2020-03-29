@@ -13,6 +13,8 @@ import { dataURItoBlob } from '../lib/helpers'
 import { ToolTextareaWidget , ToolArrayField, CollapseObjectField, PictureWidget, PickColorWidget, ObjectSelectField} from './FormWidgets'
 import { SFXSelect, SQSelect, ModSelect, ProfileSelector, MiniCard} from './CharacterWidgets'
 
+import {T,zip} from '../index'
+
 const getCharacterById=(id, cast)=>{
     return cast.find(item=>{return item.id == id})
 }
@@ -80,7 +82,7 @@ export class CharacterEditor extends React.Component {
                 formContext = {character}
                 widgets={widgets}
                 fields={fields}
-                ><Button bsStyle="danger" block type="submit">Validate</Button></Form>
+            ><Button bsStyle="danger" block type="submit">{T('Validate')}</Button></Form>
                 </div>
         </div>
     }

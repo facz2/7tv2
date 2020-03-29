@@ -18,6 +18,8 @@ import ReactCrop, { makeAspectCrop } from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
 import { SelectField } from 'material-ui';
 
+import {T,zip} from '../index'
+
 const addNameToDataURL=(dataURL, name) => {
   return dataURL.replace(";base64", `;name=${name};base64`);
 }

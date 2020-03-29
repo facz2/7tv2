@@ -16,6 +16,8 @@ import sortBy from 'sort-by'
 import { range } from 'rxjs';
 import { locale } from '../index';
 
+import {T,zip} from '../index'
+
 const PAGE_WIDTH=10.55;
 const PAGE_HEIGHT=7.55;
 const MARGIN_X=0.3;
