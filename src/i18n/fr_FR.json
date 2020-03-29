@@ -1,3 +1,24 @@
 {
-    "Villain":"Villain"
+    "Villain":"Villain",
+    "Attack":"Attack",
+    "Range":"Range",
+    "Strike":"Strike",
+    "Effects":"Effects",
+    "RATINGS":"RATINGS",
+    "Special effects": "Special effects",
+    "Star quality": "Star quality",
+    "Description": "Description",
+    "Total Vehicle Ratings": "Total Vehicle Ratings",
+    "Remove": "Remove",
+    "Download": "Download",
+    "Download as Single Image": "Download as Single Image",
+    "Download as Separate Images": "Download as Separate Images",
+    "fight":"fight",
+    "shoot":"shoot",
+    "defence":"defence",
+    "mind":"mind",
+    "body":"body",
+    "spirit":"spirit"
+
+
 }
