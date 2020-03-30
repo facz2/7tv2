@@ -14,6 +14,7 @@ import { ToolTextareaWidget , ToolArrayField, CollapseObjectField, PictureWidget
 import { SFXSelect, SQSelect, ModSelect, ProfileSelector, MiniCard} from './CharacterWidgets'
 
 import {T,zip} from '../index'
+import {translateSchema} from '../lib/i18n'
 
 const getCharacterById=(id, cast)=>{
     return cast.find(item=>{return item.id == id})
@@ -56,8 +57,8 @@ export class CharacterEditor extends React.Component {
 
         const card=character.__card.toLowerCase();
         const sch=require('../data/'+card+'-uischema.json')
-        const uiSchema=sch//applyToProps(sch,[...diff(sch['ui:order'],Object.keys(character)),'__card','__version','id'],{'ui:widget':'hidden'})
-        const schema = require('../data/'+card+'-schema.json');
+        const uiSchema=sch
+        const schema = translateSchema(require('../data/'+card+'-schema.json'), this.props.locale);
 
         const widgets={
             toolTextareaWidget:ToolTextareaWidget,
@@ -87,5 +88,7 @@ export class CharacterEditor extends React.Component {
         </div>
     }
 }
+
+CharacterEditor = connect((state)=>({locale: state.locale}))(CharacterEditor);
 
 

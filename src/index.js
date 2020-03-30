@@ -13,8 +13,9 @@ import mergePersistedState from 'redux-localstorage/lib/mergePersistedState'
 import adapter from 'redux-localstorage/lib/adapters/localStorage';
 import filter from 'redux-localstorage-filter';
 
-import Locale from './lib/simple-locale'
+
 import {connect} from 'react-redux'
+import {locale as _locale}  from './lib/i18n' 
 
 export const zip=function(arr){
   return arr.reduce(function(obj, [k, v]){return { ...obj, [k]: v }}, {});
@@ -22,15 +23,8 @@ export const zip=function(arr){
 
 export const LOCALSTORAGE_KEY = 'Studios7TV'
 
-const langFiles = require.context("./i18n", true, /^(.*\.(json$))/i);
-const localeNames = langFiles.keys().map((i)=>{
-  let L=i.match(/([a-z]{2}_[a-z]{2})/gi)
-  if (L) return L[0]; return null;
-}).filter((i)=>(i!==null))
 
-export const locale = new Locale(localeNames.reduce((obj,v)=>( {...obj,[v]:v}),{}));
-langFiles.keys().forEach((file,i)=>{ locale.load(locale[localeNames[i]], langFiles(file));});
-
+export const locale = _locale;
 
 class MyLocaleString extends React.Component{
   render(){

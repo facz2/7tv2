@@ -1,0 +1,15 @@
+version: '3.7'
+
+services:
+  7tv2:
+    container_name: 7tv2
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - '.:/app'
+    ports: 
+        - "${HOST_PORT}:3000"
+    
+    env_file:
+      - .env 
